@@ -1,3 +1,7 @@
+## Contribution workflow
+
+Before branching, committing, merging, or releasing, read and follow [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
 ## Agent skills
 
 ### Issue tracker
