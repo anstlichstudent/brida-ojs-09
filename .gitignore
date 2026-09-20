@@ -16,12 +16,10 @@
 /.vscode
 /.zed
 /.mcp.json
-/AGENTS.md
 /CLAUDE.md
 /boost.json
 /opencode.json
 /skills-lock.json
-/docs/agents/
 /auth.json
 /node_modules
 /public/build
