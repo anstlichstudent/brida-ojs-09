@@ -10,6 +10,37 @@ Aplikasi web untuk mengelola alur penerbitan jurnal BRIDA Kota Makassar, mulai d
 - Blade dan Tailwind CSS
 - SQLite untuk development lokal; MySQL ditargetkan untuk production
 
+## Struktur proyek dan pembagian area
+
+Proyek ini menggunakan Laravel monolith. Frontend, backend, dan database berada dalam satu repository, sehingga pembagian berikut menunjukkan fokus kerja, bukan batas kepemilikan mutlak.
+
+| Area | Folder atau file | Kegunaan |
+| --- | --- | --- |
+| Frontend | `resources/views/` | Halaman Blade dan view komponen Livewire. |
+| Frontend | `resources/css/` | Sumber styling aplikasi dan konfigurasi tema melalui CSS. |
+| Frontend | `resources/js/` | JavaScript aplikasi yang diproses oleh Vite. |
+| Frontend | `public/` | Entry point web dan aset statis publik. Isi `public/build/` serta aset Filament adalah hasil generate dan tidak diedit manual. |
+| Frontend | `vite.config.js`, `package.json` | Konfigurasi build serta dependency frontend. |
+| Backend | `app/Http/` | Controller, request, dan middleware HTTP saat ditambahkan. |
+| Backend | `app/Models/` | Model Eloquent dan relasi domain. |
+| Backend | `app/Providers/` | Registrasi service aplikasi dan panel Filament. |
+| Backend | `routes/` | Definisi route web dan perintah console. |
+| Backend | `config/` | Konfigurasi Laravel; nilai rahasia tetap berasal dari `.env`. |
+| Database | `database/migrations/` | Riwayat perubahan struktur database. Semua perubahan schema dibuat melalui migration. |
+| Database | `database/factories/` | Pembuat data uji untuk model. |
+| Database | `database/seeders/` | Data awal atau data development yang dapat dibuat ulang. |
+| Database | `database/database.sqlite` | Database lokal; file ini diabaikan Git dan bukan sumber data bersama. |
+| DevOps | `bootstrap/` | Bootstrap aplikasi dan cache framework. |
+| DevOps | `storage/` | Log, cache, session, dan file runtime; data hasil runtime tidak di-commit. |
+| DevOps | `tests/`, `phpunit.xml` | Test otomatis dan konfigurasi PHPUnit. |
+| DevOps | `.env.example` | Template konfigurasi environment tanpa rahasia. |
+| DevOps | `composer.json`, `composer.lock` | Dependency dan script PHP yang harus konsisten antarenvironment. |
+| DevOps | `package.json`, `package-lock.json` | Dependency dan script frontend yang harus konsisten antarenvironment. |
+
+Komponen Livewire nantinya ditempatkan di `app/Livewire/` dengan view di `resources/views/livewire/`. Resource, page, dan widget Filament ditempatkan di `app/Filament/` ketika fitur administrasi mulai dibuat.
+
+Perubahan satu fitur boleh menyentuh beberapa area. Contohnya, fitur submission dapat membutuhkan migration, model, komponen Livewire, view, dan test dalam satu branch yang sama.
+
 ## Prasyarat
 
 Pastikan perangkat development memiliki:
